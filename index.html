@@ -1,0 +1,177 @@
+<!-- Begin HTML main body -->
+<!DOCTYPE html>
+<style>
+html, body {
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 14px; 
+}
+.subchart-header-container {
+    background: #b6480d;
+    color: white;
+    margin-bottom: 10px;
+    padding: 10px 10px 10px 10px;
+}
+.subchart-header {
+    font-size: 36px;
+}
+.subchart-subheader {
+    font-size: 14px;
+    margin-top: 10px;
+}
+.container {
+    position: relative;
+    padding-top: 25px;
+    height: 0;
+}
+.container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.subchart-header-container {
+    position: relative;
+    height: 1;
+}
+.subchart-header-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+</style>
+<html lang="en" class="os-linux no-js en">
+    <head>
+        <!-- No CACHING -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="cache-control" content="max-age=0" />
+        <meta http-equiv="cache-control" content="no-cache" />
+        <meta http-equiv="expires" content="0" />
+        <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <!-- Title -->
+        <title>Economic Graph Research | LPP Visualization POC</title>
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+        <!-- Load CSS -->     
+        
+        <!-- Load Javascript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="https://code.highcharts.com/modules/annotations.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/4.2.5/highcharts.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.2/underscore-min.js"></script>
+        
+    </head>
+    <body>
+        <!-- Block with the header and subheader of the chart -->
+        <div class="highcharts-container">
+            <!-- <hr> -->
+           <!-- <div class="subchart-header-container">
+                <div class="subchart-header">Hiring</div>-->
+                <!--<div class="subchart-sub∂header">While career starters are getting hired in greater numbers than they were during the pandemic’s early days, the hiring rate for those starting out is still below pre-pandemic levels and trails the overall hiring rate in the U.S.</div>-->
+            </div>
+            <div id="container" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+        </div>
+        <!-- Logic for the chart -->
+        <script>
+            Highcharts.chart('container', { // defining chart
+                chart: {
+                    backgroundColor: '#fdfaf5', // background color of the chart
+                    type: 'line', // chart type
+                    plotBorderWidth: 1,
+                    scrollablePlotArea: {
+                        scrollPositionX: 1 // aligns the plot area to the right
+                    }
+                },
+                title: { // defining and customizing the title
+                    text: "United States",
+                    fontFamily: 'optima',
+                    fontWeight: 100
+                },
+                subtitle: { // defining ande customizing subtitle
+                    text: 'August 2022: Seasonally-Adjusted Hiring on LinkedIn',
+                    fontFamily: 'optima',
+                    fontWeight: 100
+                },
+                credits: {
+                    enabled: false // Credits off
+                },
+                xAxis: { // x-axis data labels
+                    categories: ['Aug','Sep','Oct','Nov','Dec','Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                    labels: {
+                        step: 1, // step between lables
+                        rotation: 0 // we can change this to 90 if we want vertical labels
+                    },
+                    minorTickWidth: 1,
+                    gridLineWidth: 2,
+                    tickPosition: 'inside',
+                    tickmarkPlacement: 'on',
+                    lineWidth: 1 // axis line width
+                },
+                yAxis: { // y-axis data labels
+                    enabled: false,
+                    tickAmount: 4,
+                    tickInterval: 0.2,
+                    title: { // y-axis titles
+                        text: 'LinkedIn Hiring Rate'
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: false // turning off data labels for each data point
+                        }
+                    },
+                    series: {
+                        marker: {
+                        enabled: false // turning off markers
+                      },
+                      states: {
+                        inactive: {
+                            opacity: 1
+                        }
+                      }
+                    }
+                },
+                tooltip: {
+                    shared: true,
+                    useHTML: true,
+                    headerFormat: '<table><tr><th colspan="2">{point.key}</th></tr>',
+                    pointFormat: '<tr><td style="color: {series.color}">{series.name} </td>' +
+                        '<td style="text-align: right"><b>{point.y}</b></td></tr>',
+                    footerFormat: '</table>',
+                    valueDecimals: 2
+                },
+                legend: {
+                        enabled: true, // enabling legend
+                        align: 'center', // centering
+                        layout: 'horizontal',
+                        verticalAlign: 'bottom', // legend on the bottom of the chart
+                        itemStyle: { // legend styles
+                        color: '#000000',
+                        fontWeight: 100,
+                        fontSize: '14px',
+                        fontFamily: 'optima'
+                    }
+                    },
+                series: [{ // actual data
+                    name: 'Previous Year',
+                    data: [0.96,0.96,1.03,1.10,1.09,1.02,1.10,1.21,1.23,1.18,1.35,1.19],
+                    color: '#000000', // line color of data points
+                    lineWidth: 3 // line width
+                },{
+                    name: 'Current Year',
+                    data: [1.24,1.25,1.21,1.30,1.19,1.29,1.19,1.25,1.29,1.26,1.11,1.09],
+                    color: '#a67224', // line color of data points
+                    lineWidth: 3 // line width
+                }]
+            });
+</script>
+        </body>
+</html>
